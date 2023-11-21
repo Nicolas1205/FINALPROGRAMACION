@@ -19,118 +19,118 @@ std::uniform_int_distribution<int> uniform_dist(0, 9);
 
 const char *CLEAR = "\033[2J\033[1;1H";
 
-std::pair<int, int> get_dices() {
+std::pair<int, int> generar_dados() {
   return std::make_pair(uniform_dist(el), uniform_dist(el));
 }
 
-int get_score(std::vector<std::vector<Cell>> &table, int d1, int d2) {
+int obtener_puntaje(std::vector<std::vector<Celda>> &table, int d1, int d2) {
 
-  int score = 0, value = table[d1][d2].cell_value;
+  int score = 0, value = table[d1][d2].valor_celda;
 
-  if (table[d1][d2].specials[0] && table[d1][d2].specials[1] &&
-      table[d1][d2].specials[4]) {
+  if (table[d1][d2].especial[0] && table[d1][d2].especial[1] &&
+      table[d1][d2].especial[4]) {
     score = value * 4;
-  } else if (table[d1][d2].specials[0] && table[d1][d2].specials[1]) {
+  } else if (table[d1][d2].especial[0] && table[d1][d2].especial[1]) {
     score = value * 3;
-  } else if (table[d1][d2].specials[0] ||
-             table[d1][d2].specials[1] && table[d1][d2].specials[4]) {
+  } else if (table[d1][d2].especial[0] ||
+             table[d1][d2].especial[1] && table[d1][d2].especial[4]) {
     score = value * 2;
-  } else if (table[d1][d2].specials[0] || table[d1][d2].specials[1]) {
+  } else if (table[d1][d2].especial[0] || table[d1][d2].especial[1]) {
     score = value;
   }
 
   return score;
 }
 
-void throw_dices(std::vector<Player> &players,
-                 std::vector<std::vector<Cell>> &table, int *golden_score) {
+void tirar_dados(std::vector<Jugador> &jugadores,
+                 std::vector<std::vector<Celda>> &tabla, int &puntaje_dorado) {
 
   bool player_turn = 0;
   while (1) {
-    while (players[player_turn].turns--) {
-      auto [d1, d2] = get_dices();
+    while (jugadores[player_turn].turnos) {
+      auto [d1, d2] = generar_dados();
 
-      int score = 0;
+      int puntos_obtenidos = 0;
 
-      if (!table[d1][d2].is_catched) {
-        table[d1][d2].is_catched = true;
-        table[d1][d2].player_catcher = players[player_turn].username;
-      } else if (table[d1][d2].is_catched &&
-                 table[d1][d2].player_catcher !=
-                     players[player_turn].username) {
+      if (!tabla[d1][d2].atrapada) {
+        tabla[d1][d2].atrapada= true;
+        tabla[d1][d2].jugador_receptor = jugadores[player_turn].usuario;
+      } else if (tabla[d1][d2].atrapada &&
+                 tabla[d1][d2].jugador_receptor !=
+                     jugadores[player_turn].usuario) {
 
-        show_player_results(&players[player_turn], std::make_pair(d1, d2),
-                            table[d1][d2].specials, table[d1][d2].cell_value,
-                            score);
+        mostrar_resultado_de_jugador(jugadores[player_turn], std::make_pair(d1, d2),
+                                     tabla[d1][d2].especial, tabla[d1][d2].valor_celda,
+                                     puntos_obtenidos);
 
         bool property_of = player_turn == 1 ? 0 : 1;
-        std::cout << "\nYA HA SIDO TOMADA POR " << players[property_of].username
+        std::cout << "\nYA HA SIDO TOMADA POR " << jugadores[property_of].usuario
                   << '\n';
-        players[player_turn].turns++;
+        jugadores[player_turn].turnos++;
         continue;
       }
 
-      players[player_turn].turns += table[d1][d2].specials[2] ? 1 : 0;
-      players[player_turn].turns += table[d1][d2].specials[3] ? 2 : 0;
+      jugadores[player_turn].turnos+= tabla[d1][d2].especial[2] ? 1 : 0;
+      jugadores[player_turn].turnos+= tabla[d1][d2].especial[3] ? 2 : 0;
 
-      score = get_score(table, d1, d2);
-      players[player_turn].points += score;
+      puntos_obtenidos = obtener_puntaje(tabla, d1, d2);
+      jugadores[player_turn].puntaje_total += puntos_obtenidos;
 
-      if (!score)
-        players[player_turn].nothing_catched++;
+      if (!puntos_obtenidos)
+        jugadores[player_turn].nada_atrapado++;
 
-      show_player_results(&players[player_turn], std::make_pair(d1, d2),
-                          table[d1][d2].specials, table[d1][d2].cell_value,
-                          score);
+      mostrar_resultado_de_jugador(jugadores[player_turn], std::make_pair(d1, d2),
+                          tabla[d1][d2].especial, tabla[d1][d2].valor_celda,
+                          puntos_obtenidos);
 
-      // std::this_thread::sleep_for(std::chrono::seconds(1));
+      std::this_thread::sleep_for(std::chrono::seconds(1));
 
-      if (players[player_turn].nothing_catched >= 3) {
-        std::cout << players[player_turn].username
+      if (jugadores[player_turn].nada_atrapado>= 3) {
+        std::cout << jugadores[player_turn].usuario
                   << " no ha atrapado numeros especiales"
                      " -10 puntos\n";
-        players[player_turn].points -= 10;
-        players[player_turn].nothing_catched = 0;
+        jugadores[player_turn].puntaje_total -= 10;
+        jugadores[player_turn].nada_atrapado = 0;
       }
 
-      if (players[player_turn].points >= *golden_score) {
-        show_player_winner(&players[player_turn]);
+      if (jugadores[player_turn].puntaje_total >= puntaje_dorado) {
+        mostrar_jugador_ganador(&jugadores[player_turn]);
         return;
       }
     }
 
     player_turn = player_turn == 0 ? 1 : 0;
-    players[player_turn].turns = 1;
+    jugadores[player_turn].turnos = 1;
   }
 }
 
-void play(std::vector<std::vector<Cell>> &table, int *golden_score) {
+void jugar(std::vector<std::vector<Celda>> &tabla, int &puntaje_dorado) {
 
-  char play_options;
-  std::vector<Player> players;
-  bool loaded = 0;
+  char opcion_de_juego;
+  std::vector<Jugador> jugadores_en_juego;
+  bool jugadores_cargados = 0;
 
   while (1) {
     std::cout << CLEAR;
-    show_play_menu(players);
+    mostrar_menu_de_juego(jugadores_en_juego);
 
-    scanf("%c", &play_options);
+    scanf("%c", &opcion_de_juego);
 
-    if (play_options == '1') {
+    if (opcion_de_juego == '1') {
       std::cout << CLEAR;
-      players = chose_players();
-      loaded = 1;
+      jugadores_en_juego = chose_players();
+      jugadores_cargados = 1;
     }
-    if (play_options == '2') {
+    if (opcion_de_juego == '2') {
       std::cout << CLEAR;
-      if (loaded) {
-        throw_dices(players, table, golden_score);
-        players[0].points = 0;
-        players[1].points = 0;
-        std::this_thread::sleep_for(std::chrono::seconds(5));
+      if (jugadores_cargados) {
+        tirar_dados(jugadores_en_juego, tabla, puntaje_dorado);
+        jugadores_en_juego[0].puntaje_total = 0;
+        jugadores_en_juego[1].puntaje_total = 0;
+        //std::this_thread::sleep_for(std::chrono::seconds(5));
       }
     }
-    if (play_options == '3')
+    if (opcion_de_juego == '3')
       return;
   }
 }

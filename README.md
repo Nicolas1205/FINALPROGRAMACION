@@ -30,6 +30,8 @@ Run inside `src` direcotory:
 g++ -std=c++17 -o main main.cpp genTable.cpp registerPlayer.cpp chosePlayer.cpp sieve.cpp showMenus.cpp play.cpp
 ```
 
+g++ -std=c++17 -o main main.cpp gen_table.cpp register_player.cpp chose_player.cpp sieve.cpp show_menus.cpp play.cpp
+
 
 
 

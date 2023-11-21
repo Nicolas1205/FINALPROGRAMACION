@@ -5,9 +5,9 @@
 
 #define CHOSEPLAYER
 
-bool search_player(std::string username, std::vector<Player> &players_data,
-                   std::vector<Player> &players, int p);
+bool search_player(std::string usuario, std::vector<Jugador> &jugadores,
+                   std::vector<Jugador> &players, int p);
 
-std::vector<Player> chose_players();
+std::vector<Jugador> chose_players();
 
 #endif

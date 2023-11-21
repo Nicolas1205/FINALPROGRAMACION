@@ -2,6 +2,6 @@
 #define SIEVE
 #include <vector>
 
-std::vector<bool> get_sieve();
+std::vector<bool> crear_criba();
 
 #endif

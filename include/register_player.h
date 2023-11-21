@@ -3,22 +3,23 @@
 #ifndef REGISTERPLAYER
 #define REGISTERPLAYER
 
-typedef struct {
-  std::string name, surname, username;
-  bool playing = false;
-  int points = 0;
-  int turns = 1;
-  int nothing_catched = 0;
+struct Jugador {
+  std::string nombre;
+  std::string apellido;
+  std::string usuario;
+  bool jugando = false; // ??
+  int puntaje_total = 0;
+  int turnos = 1;
+  int nada_atrapado = 0;
+};
 
-} Player;
+std::vector<Jugador> obtener_datos_de_jugadores();
 
-std::vector<Player> get_players_data();
+bool comparar_por_apellido(Jugador a, Jugador b);
 
-bool compare(Player a, Player b);
+void crear_jugador(std::string nombre, std::string apellido, std::string usuario,
+                 std::vector<Jugador> &jugadores);
 
-void post_player(std::string name, std::string surname, std::string username,
-                 std::vector<Player> &players_data);
-
-void show_players();
+void mostrar_jugadores();
 
 #endif

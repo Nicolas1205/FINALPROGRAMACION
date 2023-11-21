@@ -7,55 +7,53 @@
 #include <thread>
 
 int main() {
+  const char *LIMPIAR_PANTALLA = "\033[2J\033[1;1H"; // Limpiar la pantalla
 
-  const char *CLEAR = "\033[2J\033[1;1H";
+  char opcion = 0;
 
-  char menu_option;
+  int puntaje_dorado = 0;
 
-  int golden_score = 0;
-
-  std::vector<std::vector<Cell>> table;
-  std::vector<Player> players_data = get_players_data();
-  std::vector<bool> loaded(2, 0);
+  std::vector<std::vector<Celda>> tabla;                  // tablero de juego
+  std::vector<Jugador> jugadores = obtener_datos_de_jugadores(); // Datos de Jugadores no necesario
+  std::vector<bool> opciones_cargadas(2, 0); // Opciones 1 y 2 cargadas para poder jugar
 
   while (1) {
-    std::cout << CLEAR;
-    show_main_menu(loaded[0], players_data.size(), &golden_score);
-    std::cin >> menu_option;
-    if (menu_option == '1') {
-      table = gen_table(golden_score);
-      loaded[0] = 1;
+    std::cout << LIMPIAR_PANTALLA;
+    mostrar_menu_principal(opciones_cargadas[0], jugadores.size(), puntaje_dorado);
+    std::cin >> opcion;
+    if (opcion == '1') {
+      tabla = generar_tabla(puntaje_dorado);
+      opciones_cargadas[0] = 1;
     }
-    if (menu_option == '2') {
+    if (opcion == '2') {
 
-      if (players_data.size() == 10)
+      if (jugadores.size() == 10)
         continue;
 
-      std::cout << CLEAR;
-      std::string name, surname, username;
+      std::cout << LIMPIAR_PANTALLA;
+      std::string nombre, apellido, usuario;
       puts("*************** Registrar Usario **************");
       printf("\nNombre: ");
-      std::cin >> name;
+      std::cin >> nombre;
       printf("\nApellido: ");
-      std::cin >> surname;
+      std::cin >> apellido;
       printf("\nNombre de Usario: ");
-      std::cin >> username;
-      post_player(name, surname, username, players_data);
-      loaded[1] = 1;
+      std::cin >> usuario;
+      crear_jugador(nombre, apellido, usuario, jugadores);
+      opciones_cargadas[1] = 1;
     }
-    if (menu_option == '3') {
-      std::cout << CLEAR;
-      show_players();
+    if (opcion == '3') {
+      std::cout << LIMPIAR_PANTALLA;
+      mostrar_jugadores();
       std::this_thread::sleep_for(std::chrono::seconds(5));
     }
-    if (menu_option == '4') {
-      if (loaded[0] && players_data.size() >= 2) {
-        play(table, &golden_score);
+    if (opcion == '4') {
+      if (opciones_cargadas[0] && jugadores.size() >= 2) {
+        jugar(tabla, puntaje_dorado);
       }
     }
-    if (menu_option == '5')
+    if (opcion == '5')
       break;
   }
-
   return 0;
 }

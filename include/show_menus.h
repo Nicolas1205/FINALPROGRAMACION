@@ -5,13 +5,13 @@
 #ifndef SHOWMENUS
 #define SHOWMENUS
 
-void show_player_winner(Player *winner);
+void mostrar_jugador_ganador(Jugador *winner);
 
-void show_main_menu(bool table_created, size_t players_size, int *golden_score);
+void mostrar_menu_principal(bool table_created, size_t players_size, int &golden_score);
 
-void show_play_menu(std::vector<Player> &players);
+void mostrar_menu_de_juego(std::vector<Jugador> &players);
 
-void show_player_results(Player *player, std::pair<int, int> dices,
-                         bool *specials, int found_number, int score);
+void mostrar_resultado_de_jugador(Jugador &player, std::pair<int, int> dices,
+                         bool specials[], int numero_encontrado, int score);
 
 #endif // SHOWMENUS

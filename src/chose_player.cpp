@@ -3,18 +3,18 @@
 #include <iostream>
 #include <string>
 
-bool search_player(std::string username, std::vector<Player> &players_data,
-                   std::vector<Player> &players, int p) {
+bool search_player(std::string usuario, std::vector<Jugador> &jugadores,
+                   std::vector<Jugador> &jugadores_en_juego, int posicion) {
 
-  for (int i = 0; i < players_data.size(); i++) {
-    if (players_data[i].username == username) {
-      if (!players_data[i].playing) {
-        players_data[i].playing = true;
-        players[p].name = players_data[i].name;
-        players[p].surname = players_data[i].surname;
-        players[p].username = players_data[i].username;
+  for (int i = 0; i < jugadores.size(); i++) {
+    if (jugadores[i].usuario == usuario) {
+      if (!jugadores[i].jugando ) {
+        jugadores[i].jugando = true;
+        jugadores_en_juego[posicion].nombre = jugadores[i].nombre;
+        jugadores_en_juego[posicion].apellido = jugadores[i].apellido;
+        jugadores_en_juego[posicion].usuario = jugadores[i].usuario;
         return true;
-      } else if (players_data[i].playing) {
+      } else if (jugadores[i].jugando) {
         puts("ESTE JUGADOR YA FUE SELECCIONADO");
         return false;
       }
@@ -24,26 +24,25 @@ bool search_player(std::string username, std::vector<Player> &players_data,
   return false;
 }
 
-std::vector<Player> chose_players() {
+std::vector<Jugador> chose_players() {
 
-  std::vector<Player> players_data = get_players_data();
-  std::vector<Player> players(2);
+  std::vector<Jugador> jugadores = obtener_datos_de_jugadores();
+  std::vector<Jugador> jugadores_en_juego(2);
 
-  for (int i = 0; i < 2; i++) {
-    bool selected = false;
-    while (!selected) {
+  for (int posicion = 0; posicion < 2; posicion++) {
+    bool seleccionado = false;
+    while (!seleccionado) {
 
       printf("SELECIONAR JUGADORES\n");
-      printf("Ingrese username del jugador %d: ", i + 1);
-      // FIXME: FIX: if it doesn't work
-      std::string username;
-      std::cin >> username;
-      if (search_player(username, players_data, players, i)) {
-        selected = true;
-        std::cout << players[i].username << " fue seleccionado!\n";
+      printf("Ingrese username del jugador %d: ", posicion + 1);
+      std::string usuario;
+      std::cin >> usuario;
+      if (search_player(usuario, jugadores, jugadores_en_juego, posicion)) {
+        seleccionado = true;
+        std::cout << jugadores_en_juego[posicion].usuario<< " fue seleccionado!\n";
       }
     }
   }
 
-  return players;
+  return jugadores_en_juego;
 }

@@ -3,16 +3,16 @@
 
 #ifndef PLAY
 #define PLAY
-std::pair<int, int> get_dices();
+std::pair<int, int> generar_dados();
 
-int get_score(std::vector<std::vector<Cell>> &table, int d1, int d2);
+int obtener_puntaje(std::vector<std::vector<Celda>> &tabla, int primer_dado, int segundo_dado);
 
-std::vector<bool> specials(std::vector<std::vector<Cell>> &table, int d1,
-                           int d2);
+std::vector<bool> specials(std::vector<std::vector<Celda>> &tabla, int primer_dado,
+                           int segundo_dado);
 
-void throw_dices(std::vector<Player> &players,
-                 std::vector<std::vector<Cell>> &table, int *golden_score);
+void tirar_dados(std::vector<Jugador> &jugadores,
+                 std::vector<std::vector<Celda>> &tabla, int *puntaje_dorado);
 
-void play(std::vector<std::vector<Cell>> &table, int *golden_score);
+void jugar(std::vector<std::vector<Celda>> &tabla, int &puntaje_dorado);
 
 #endif
