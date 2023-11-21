@@ -9,17 +9,17 @@
 const int8_t COLUMNAS = 10;
 const int8_t FILAS = 10;
 
-std::vector<bool> existe(1001, 0);
+std::vector<bool> existe(100, 0);
 
 std::vector<bool> criba = crear_criba();
 
-int count_primes = 0, count_palindromes = 0, count_both = 0;
+int contar_primos = 0, contar_palindromos = 0, contar_ambos = 0;
 
 int obtener_numero_aleatorio() {
 
   std::random_device r;
   std::default_random_engine el(r());
-  std::uniform_int_distribution<int> uniform_dist(1, 1000);
+  std::uniform_int_distribution<int> uniform_dist(1, 100);
 
   int random = uniform_dist(el);
   if (!existe[random]) {
@@ -45,7 +45,7 @@ bool es_numero_palindromo(int number) {
   std::reverse(s.begin(), s.end());
 
   if (s == palindrome) {
-    count_palindromes++;
+    contar_palindromos++;
     return true;
   }
   return false;
@@ -63,22 +63,24 @@ std::vector<std::vector<Celda>> generar_tabla(int &puntaje_dorado) {
 
   std::vector<std::vector<Celda>> tabla(COLUMNAS, std::vector<Celda>(FILAS));
 
-  bool (*ptr_funciones[])(int) = {es_numero_primo, es_numero_palindromo,
-                                  es_numero_amigo, es_numero_perfecto};
-
   for (int i = 0; i < COLUMNAS; i++) {
     for (int j = 0; j < FILAS; j++) {
       int numero_aleatorio = obtener_numero_aleatorio();
-      tabla[i][j].valor_celda = numero_aleatorio;
-      for (int k = 0; k < 4; k++) {
-        tabla[i][j].especial[k] = (*ptr_funciones[k])(numero_aleatorio);
+      tabla[i][j].numero_celda = numero_aleatorio;
+      tabla[i][j].is_prime = es_numero_primo(numero_aleatorio);
+      tabla[i][j].is_palindrome = es_numero_palindromo(numero_aleatorio);
+      tabla[i][j].is_friend = es_numero_amigo(numero_aleatorio);
+      tabla[i][j].is_perfect = es_numero_perfecto(numero_aleatorio);
+      if(i == j) {
+        tabla[i][j].is_diagonal = true;
       }
-      tabla[i][j].especial[0] && tabla[i][j].especial[1] ? count_both++ : 0;
-      tabla[i][j].especial[4] = i == j ? 1 : 0;
+      if(tabla[i][j].is_prime && tabla[i][j].is_palindrome) {
+        contar_ambos++;
+      }
     }
   }
 
-  puntaje_dorado = count_primes + count_palindromes + count_both + 10000;
+  puntaje_dorado = contar_primos + contar_palindromos + contar_ambos + 1000;
 
   return tabla;
 }

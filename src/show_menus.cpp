@@ -1,5 +1,6 @@
 #include "../include/show_menus.h"
 #include "../include/chose_player.h"
+#include "../include/gen_table.h"
 #include <iostream>
 #include <stdio.h>
 #include <string>
@@ -56,23 +57,30 @@ void mostrar_menu_de_juego(std::vector<Jugador> &jugadores) {
          "Elija una opcion: ");
 }
 
-void mostrar_resultado_de_jugador(Jugador &jugador, std::pair<int, int> dices,
-                         bool especial[], int found_number, int score) {
+void mostrar_resultado_de_jugador(Jugador &jugador, std::pair<int, int> dados,
+                         Celda &celda, int puntaje) {
 
   std::cout << "\n\nTurno de jugador: " << jugador.usuario << '\n';
   std::cout << "Lanzando dados...\n";
-  std::cout << "Dado 1: " << dices.first << " - Dado 2: " << dices.second
+  std::cout << "Dado 1: " << dados.first << " - Dado 2: " << dados.second
             << '\n';
-  std::cout << "Numero Encontrado: " << found_number;
+  std::cout << "Numero Encontrado: " << celda.numero_celda;
 
-  std::vector<std::string> messages = {" (primo) ", " (capicua) ",
-                                       " (amigo) 1 turno ",
-                                       " (perfecto 2 turnos) ", " (diagonal) "};
-
-  for (int i = 0; i < 5; i++) {
-    if (especial[i])
-      std::cout << messages[i];
+  if(celda.is_prime) {
+    std::cout<<" (primo) ";
   }
-
-  std::cout << "\nPuntaje : " << score << '\n';
+  if(celda.is_palindrome) {
+    std::cout<<" (capicua) ";
+  }
+  if(celda.is_friend) {
+    std::cout<<" (amigo) 1 turno ";
+  }
+  if(celda.is_perfect) {
+    std::cout<<" (perfecto) 2 turnos ";
+  }
+  if(celda.is_diagonal) {
+    std::cout<<" (diagonal) ";
+  }
+  std::cout << "\nPuntaje : " << puntaje << '\n';
+  std::cout<<  "Puntaje Total: " << jugador.puntaje_total << '\n';
 }
