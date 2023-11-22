@@ -66,19 +66,19 @@ void mostrar_resultado_de_jugador(Jugador &jugador, std::pair<int, int> dados,
             << '\n';
   std::cout << "Numero Encontrado: " << celda.numero_celda;
 
-  if(celda.is_prime) {
+  if(celda.es_primo) {
     std::cout<<" (primo) ";
   }
-  if(celda.is_palindrome) {
+  if(celda.es_capicua) {
     std::cout<<" (capicua) ";
   }
-  if(celda.is_friend) {
+  if(celda.es_amigo) {
     std::cout<<" (amigo) 1 turno ";
   }
-  if(celda.is_perfect) {
+  if(celda.es_perfecto) {
     std::cout<<" (perfecto) 2 turnos ";
   }
-  if(celda.is_diagonal) {
+  if(celda.es_diagonal) {
     std::cout<<" (diagonal) ";
   }
   std::cout << "\nPuntaje : " << puntaje << '\n';

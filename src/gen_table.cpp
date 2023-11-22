@@ -13,7 +13,7 @@ std::vector<bool> existe(100, 0);
 
 std::vector<bool> criba = crear_criba();
 
-int contar_primos = 0, contar_palindromos = 0, contar_ambos = 0;
+int contar_primos = 0, contar_capicua = 0, contar_ambos = 0;
 
 int obtener_numero_aleatorio() {
 
@@ -45,7 +45,7 @@ bool es_numero_palindromo(int number) {
   std::reverse(s.begin(), s.end());
 
   if (s == palindrome) {
-    contar_palindromos++;
+    contar_capicua++;
     return true;
   }
   return false;
@@ -67,20 +67,20 @@ std::vector<std::vector<Celda>> generar_tabla(int &puntaje_dorado) {
     for (int j = 0; j < FILAS; j++) {
       int numero_aleatorio = obtener_numero_aleatorio();
       tabla[i][j].numero_celda = numero_aleatorio;
-      tabla[i][j].is_prime = es_numero_primo(numero_aleatorio);
-      tabla[i][j].is_palindrome = es_numero_palindromo(numero_aleatorio);
-      tabla[i][j].is_friend = es_numero_amigo(numero_aleatorio);
-      tabla[i][j].is_perfect = es_numero_perfecto(numero_aleatorio);
+      tabla[i][j].es_primo = es_numero_primo(numero_aleatorio);
+      tabla[i][j].es_capicua = es_numero_palindromo(numero_aleatorio);
+      tabla[i][j].es_amigo = es_numero_amigo(numero_aleatorio);
+      tabla[i][j].es_perfecto = es_numero_perfecto(numero_aleatorio);
       if(i == j) {
-        tabla[i][j].is_diagonal = true;
+        tabla[i][j].es_diagonal = true;
       }
-      if(tabla[i][j].is_prime && tabla[i][j].is_palindrome) {
+      if(tabla[i][j].es_primo && tabla[i][j].es_capicua) {
         contar_ambos++;
       }
     }
   }
 
-  puntaje_dorado = contar_primos + contar_palindromos + contar_ambos + 1000;
+  puntaje_dorado = contar_primos + contar_capicua + contar_ambos + 1000;
 
   return tabla;
 }

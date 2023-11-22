@@ -25,26 +25,25 @@ std::pair<int, int> generar_dados() {
 
 int obtener_puntaje(Celda &celda) {
   int puntaje = 0; 
-  if(celda.is_prime && celda.is_palindrome && celda.is_diagonal) {
+  if(celda.es_primo && celda.es_capicua && celda.es_diagonal) {
     puntaje = celda.numero_celda * 4;
   }
-  else if (celda.is_prime && celda.is_palindrome) {
+  else if (celda.es_primo && celda.es_capicua) {
     puntaje = celda.numero_celda * 3;
   }
-  else if (celda.is_prime || celda.is_palindrome && celda.is_diagonal) {
+  else if (celda.es_primo || celda.es_capicua && celda.es_diagonal) {
     puntaje = celda.numero_celda * 2; 
-  } else if(celda.is_prime || celda.is_palindrome) {
+  } else if(celda.es_primo || celda.es_capicua) {
     puntaje = celda.numero_celda; 
   }
   return puntaje;
 }
 
-
-// Celda Atrapada
 void tirar_dados(std::vector<Jugador> &jugadores_en_juego,
                  std::vector<std::vector<Celda>> &tabla, int &puntaje_dorado) {
 
   bool turno_jugador = 0;
+
   while (1) {
     while (jugadores_en_juego[turno_jugador].turnos--) {
       auto [d1, d2] = generar_dados();
@@ -53,6 +52,7 @@ void tirar_dados(std::vector<Jugador> &jugadores_en_juego,
 
       Celda celda = tabla[d1][d2];
 
+      // modolurizar
       if (tabla[d1][d2].atrapada == false) {
         tabla[d1][d2].atrapada= true;
         tabla[d1][d2].jugador_receptor = jugadores_en_juego[turno_jugador].usuario;
@@ -69,13 +69,15 @@ void tirar_dados(std::vector<Jugador> &jugadores_en_juego,
         continue;
       }
 
-      if(celda.is_friend) {
+      // moduralizar
+      if(celda.es_amigo) {
         jugadores_en_juego[turno_jugador].turnos+=1;
       } 
-      if(celda.is_perfect) {
+      if(celda.es_perfecto) {
         jugadores_en_juego[turno_jugador].turnos+=2;
       }
 
+      // modularizar
       puntos_obtenidos = obtener_puntaje(celda);
       std::cout<<"puntos: "<<puntos_obtenidos<<'\n';
       jugadores_en_juego[turno_jugador].puntaje_total += puntos_obtenidos;
@@ -87,8 +89,9 @@ void tirar_dados(std::vector<Jugador> &jugadores_en_juego,
       mostrar_resultado_de_jugador(jugadores_en_juego[turno_jugador], std::make_pair(d1, d2),
                           celda, puntos_obtenidos);
 
-      std::this_thread::sleep_for(std::chrono::seconds(1));
+      //std::this_thread::sleep_for(std::chrono::seconds(1));
 
+      // moduralizar
       if (jugadores_en_juego[turno_jugador].nada_atrapado >= 3) {
         std::cout << jugadores_en_juego[turno_jugador].usuario
                   << " no ha atrapado numeros especiales"
@@ -103,6 +106,7 @@ void tirar_dados(std::vector<Jugador> &jugadores_en_juego,
       }
     }
 
+    // moduralizar
     if(turno_jugador == 0) {
       turno_jugador = 1;
     } else {
@@ -123,20 +127,21 @@ void jugar(std::vector<std::vector<Celda>> &tabla, int &puntaje_dorado) {
     std::cout << LIMPIAR_PANTALLA;
     mostrar_menu_de_juego(jugadores_en_juego);
 
-    scanf("%c", &opcion_de_juego);
+    std::cin>>opcion_de_juego;
 
     if (opcion_de_juego == '1') {
       std::cout << LIMPIAR_PANTALLA;
-      jugadores_en_juego = chose_players();
+      jugadores_en_juego = elegir_jugadores();
       jugadores_cargados = 1;
     }
     if (opcion_de_juego == '2') {
       std::cout << LIMPIAR_PANTALLA;
       if (jugadores_cargados) {
         tirar_dados(jugadores_en_juego, tabla, puntaje_dorado);
+
         jugadores_en_juego[0].puntaje_total = 0;
         jugadores_en_juego[1].puntaje_total = 0;
-        std::this_thread::sleep_for(std::chrono::seconds(5));
+        //std::this_thread::sleep_for(std::chrono::seconds(5));
       }
     }
     if (opcion_de_juego == '3')

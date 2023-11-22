@@ -14,7 +14,7 @@ int main() {
   int puntaje_dorado = 0;
 
   std::vector<std::vector<Celda>> tabla;                  // tablero de juego
-  std::vector<Jugador> jugadores = obtener_datos_de_jugadores(); // Datos de Jugadores no necesario
+  std::vector<Jugador> jugadores;  // = obtener_datos_de_jugadores(); // Datos de Jugadores no necesario
   std::vector<bool> opciones_cargadas(2, 0); // Opciones 1 y 2 cargadas para poder jugar
 
   while (1) {
@@ -31,8 +31,9 @@ int main() {
         continue;
 
       std::cout << LIMPIAR_PANTALLA;
+      // moduralizar
       std::string nombre, apellido, usuario;
-      puts("*************** Registrar Usario **************");
+      puts("*************** Registrar Usuario **************");
       printf("\nNombre: ");
       std::cin >> nombre;
       printf("\nApellido: ");
@@ -45,7 +46,6 @@ int main() {
     if (opcion == '3') {
       std::cout << LIMPIAR_PANTALLA;
       mostrar_jugadores();
-      std::this_thread::sleep_for(std::chrono::seconds(5));
     }
     if (opcion == '4') {
       if (opciones_cargadas[0] && jugadores.size() >= 2) {

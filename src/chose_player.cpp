@@ -3,7 +3,7 @@
 #include <iostream>
 #include <string>
 
-bool search_player(std::string usuario, std::vector<Jugador> &jugadores,
+bool buscar_jugador(std::string usuario, std::vector<Jugador> &jugadores,
                    std::vector<Jugador> &jugadores_en_juego, int posicion) {
 
   for (int i = 0; i < jugadores.size(); i++) {
@@ -24,7 +24,7 @@ bool search_player(std::string usuario, std::vector<Jugador> &jugadores,
   return false;
 }
 
-std::vector<Jugador> chose_players() {
+std::vector<Jugador> elegir_jugadores() {
 
   std::vector<Jugador> jugadores = obtener_datos_de_jugadores();
   std::vector<Jugador> jugadores_en_juego(2);
@@ -37,7 +37,7 @@ std::vector<Jugador> chose_players() {
       printf("Ingrese username del jugador %d: ", posicion + 1);
       std::string usuario;
       std::cin >> usuario;
-      if (search_player(usuario, jugadores, jugadores_en_juego, posicion)) {
+      if (buscar_jugador(usuario, jugadores, jugadores_en_juego, posicion)) {
         seleccionado = true;
         std::cout << jugadores_en_juego[posicion].usuario<< " fue seleccionado!\n";
       }

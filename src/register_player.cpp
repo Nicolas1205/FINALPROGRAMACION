@@ -68,11 +68,11 @@ void crear_jugador(std::string nombre, std::string apellido, std::string usuario
 
 void mostrar_jugadores() {
 
-  std::vector<Jugador> players_data = obtener_datos_de_jugadores();
+  std::vector<Jugador> jugadores = obtener_datos_de_jugadores();
 
-  for (int i = 0; i < players_data.size(); i++) {
-    std::cout << "Usuario: " << players_data[i].usuario << "\n\t";
-    std::cout << "Nombre: " << players_data[i].nombre << "\n\t";
-    std::cout << "Apellido: " << players_data[i].apellido << "\n";
+  for (int i = 0; i < jugadores.size(); i++) {
+    std::cout << "Usuario: " << jugadores[i].usuario << "\n\t";
+    std::cout << "Nombre: " << jugadores[i].nombre << "\n\t";
+    std::cout << "Apellido: " << jugadores[i].apellido << "\n";
   }
 }
