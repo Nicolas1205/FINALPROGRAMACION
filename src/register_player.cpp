@@ -66,10 +66,7 @@ void crear_jugador(std::string nombre, std::string apellido, std::string usuario
   }
 }
 
-void mostrar_jugadores() {
-
-  std::vector<Jugador> jugadores = obtener_datos_de_jugadores();
-
+void mostrar_jugadores(std::vector<Jugador> &jugadores) {
   for (int i = 0; i < jugadores.size(); i++) {
     std::cout << "Usuario: " << jugadores[i].usuario << "\n\t";
     std::cout << "Nombre: " << jugadores[i].nombre << "\n\t";

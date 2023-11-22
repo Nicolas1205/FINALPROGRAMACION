@@ -1,4 +1,5 @@
 #include "chose_player.h"
+#include "gen_table.h"
 #include <string>
 #include <vector>
 
@@ -11,7 +12,7 @@ void mostrar_menu_principal(bool table_created, size_t players_size, int &golden
 
 void mostrar_menu_de_juego(std::vector<Jugador> &players);
 
-void mostrar_resultado_de_jugador(Jugador &player, std::pair<int, int> dices,
-                         bool specials[], int numero_encontrado, int score);
+void mostrar_resultado_de_jugador(Jugador &jugador, std::pair<int, int> dices,
+                         Celda &celda, int puntaje);
 
 #endif // SHOWMENUS

@@ -1,10 +1,7 @@
-3
+2
 a
 	a
 	a
-secadora
-	nicolas
-	anachuri
-s
-	s
-	s
+b
+	b
+	b

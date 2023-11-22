@@ -5,16 +5,17 @@
 #define GENTABLE
 
 struct Celda {
-  std::string jugador_receptor;
-  int valor_celda;
+  int numero_celda;
+  int puntaje_celda;
+
   bool atrapada = false;
-  bool especial[5];
-  // order
-  // bool is_prime = false;
-  // bool is_palindrome = false;
-  // bool is_friend = false;
-  // bool is_perfect = false;
-  // bool in_diagonal = false;
+
+  bool es_primo = false;
+  bool es_capicua = false;
+  bool es_amigo = false;
+  bool es_perfecto = false;
+  bool es_diagonal = false;
+  std::string jugador_receptor;
 };
 
 int obtener_numero_aleatorio();

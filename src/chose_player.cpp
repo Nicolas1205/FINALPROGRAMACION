@@ -8,36 +8,33 @@ bool buscar_jugador(std::string usuario, std::vector<Jugador> &jugadores,
 
   for (int i = 0; i < jugadores.size(); i++) {
     if (jugadores[i].usuario == usuario) {
-      if (!jugadores[i].jugando ) {
+      if (jugadores[i].jugando == false ) {
         jugadores[i].jugando = true;
-        jugadores_en_juego[posicion].nombre = jugadores[i].nombre;
-        jugadores_en_juego[posicion].apellido = jugadores[i].apellido;
-        jugadores_en_juego[posicion].usuario = jugadores[i].usuario;
+        jugadores_en_juego[posicion] = jugadores[i];
         return true;
-      } else if (jugadores[i].jugando) {
-        puts("ESTE JUGADOR YA FUE SELECCIONADO");
+      } else {
+        std::cout<<"ESTE JUGADOR YA FUE SELECCIONADO";
         return false;
       }
     }
   }
-  puts("ESTE JUGADOR NO ESTA REGISTRADO");
+  std::cout<<"ESTE JUGADOR NO ESTA REGISTRADO";
   return false;
 }
 
-std::vector<Jugador> elegir_jugadores() {
+std::vector<Jugador> elegir_jugadores(std::vector<Jugador> &jugadores) {
 
-  std::vector<Jugador> jugadores = obtener_datos_de_jugadores();
   std::vector<Jugador> jugadores_en_juego(2);
 
   for (int posicion = 0; posicion < 2; posicion++) {
     bool seleccionado = false;
+    // TODO: moduralizar
     while (!seleccionado) {
-
-      printf("SELECIONAR JUGADORES\n");
-      printf("Ingrese username del jugador %d: ", posicion + 1);
+      std::cout<<"SELECIONAR JUGADORES\n";
+      std::cout<<"Ingrese username del jugador "<<posicion+1<<": ";
       std::string usuario;
       std::cin >> usuario;
-      if (buscar_jugador(usuario, jugadores, jugadores_en_juego, posicion)) {
+      if (buscar_jugador(usuario, jugadores, jugadores_en_juego, posicion)) { // TODO: Side-effect
         seleccionado = true;
         std::cout << jugadores_en_juego[posicion].usuario<< " fue seleccionado!\n";
       }

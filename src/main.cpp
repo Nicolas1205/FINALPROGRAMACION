@@ -33,19 +33,20 @@ int main() {
       std::cout << LIMPIAR_PANTALLA;
       // moduralizar
       std::string nombre, apellido, usuario;
-      puts("*************** Registrar Usuario **************");
-      printf("\nNombre: ");
+      std::cout<<"*************** Registrar Usuario **************";
+      std::cout<<"\nNombre: ";
       std::cin >> nombre;
-      printf("\nApellido: ");
+      std::cout<<"\nApellido: ";
       std::cin >> apellido;
-      printf("\nNombre de Usario: ");
+      std::cout<<"\nNombre de Usuario: ";
       std::cin >> usuario;
       crear_jugador(nombre, apellido, usuario, jugadores);
       opciones_cargadas[1] = 1;
     }
     if (opcion == '3') {
       std::cout << LIMPIAR_PANTALLA;
-      mostrar_jugadores();
+      mostrar_jugadores(jugadores);
+      std::this_thread::sleep_for(std::chrono::seconds(5));
     }
     if (opcion == '4') {
       if (opciones_cargadas[0] && jugadores.size() >= 2) {

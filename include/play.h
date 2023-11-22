@@ -5,10 +5,7 @@
 #define PLAY
 std::pair<int, int> generar_dados();
 
-int obtener_puntaje(std::vector<std::vector<Celda>> &tabla, int primer_dado, int segundo_dado);
-
-std::vector<bool> specials(std::vector<std::vector<Celda>> &tabla, int primer_dado,
-                           int segundo_dado);
+int obtener_puntaje(Celda &celda);
 
 void tirar_dados(std::vector<Jugador> &jugadores,
                  std::vector<std::vector<Celda>> &tabla, int *puntaje_dorado);

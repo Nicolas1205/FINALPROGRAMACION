@@ -20,6 +20,6 @@ bool comparar_por_apellido(Jugador a, Jugador b);
 void crear_jugador(std::string nombre, std::string apellido, std::string usuario,
                  std::vector<Jugador> &jugadores);
 
-void mostrar_jugadores();
+void mostrar_jugadores(std::vector<Jugador> &jugadores);
 
 #endif
