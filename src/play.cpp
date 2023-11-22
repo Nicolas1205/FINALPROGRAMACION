@@ -117,7 +117,7 @@ void tirar_dados(std::vector<Jugador> &jugadores_en_juego,
   }
 }
 
-void jugar(std::vector<std::vector<Celda>> &tabla, int &puntaje_dorado) {
+void jugar(std::vector<Jugador> &jugadores, std::vector<std::vector<Celda>> &tabla, int &puntaje_dorado) {
 
   char opcion_de_juego;
   std::vector<Jugador> jugadores_en_juego;
@@ -131,7 +131,7 @@ void jugar(std::vector<std::vector<Celda>> &tabla, int &puntaje_dorado) {
 
     if (opcion_de_juego == '1') {
       std::cout << LIMPIAR_PANTALLA;
-      jugadores_en_juego = elegir_jugadores();
+      jugadores_en_juego = elegir_jugadores(jugadores);
       jugadores_cargados = 1;
     }
     if (opcion_de_juego == '2') {

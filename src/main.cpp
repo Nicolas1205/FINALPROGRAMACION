@@ -50,7 +50,7 @@ int main() {
     }
     if (opcion == '4') {
       if (opciones_cargadas[0] && jugadores.size() >= 2) {
-        jugar(tabla, puntaje_dorado);
+        jugar(jugadores, tabla, puntaje_dorado);
       }
     }
     if (opcion == '5')
