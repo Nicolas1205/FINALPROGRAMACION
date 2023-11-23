@@ -40,7 +40,7 @@ int obtener_puntaje(Celda &celda) {
 }
 
 void tirar_dados(std::vector<Jugador> &jugadores_en_juego,
-                 std::vector<std::vector<Celda>> &tabla, int &puntaje_dorado) {
+                 std::vector<std::vector<Celda>> &tabla, int puntaje_dorado) {
 
   bool turno_jugador = 0;
 
@@ -101,7 +101,7 @@ void tirar_dados(std::vector<Jugador> &jugadores_en_juego,
       }
 
       if (jugadores_en_juego[turno_jugador].puntaje_total >= puntaje_dorado) {
-        mostrar_jugador_ganador(&jugadores_en_juego[turno_jugador]);
+        mostrar_jugador_ganador(jugadores_en_juego[turno_jugador]);
         return;
       }
     }
@@ -117,7 +117,7 @@ void tirar_dados(std::vector<Jugador> &jugadores_en_juego,
   }
 }
 
-void jugar(std::vector<Jugador> &jugadores, std::vector<std::vector<Celda>> &tabla, int &puntaje_dorado) {
+void jugar(std::vector<Jugador> &jugadores, std::vector<std::vector<Celda>> &tabla, int puntaje_dorado) {
 
   char opcion_de_juego;
   std::vector<Jugador> jugadores_en_juego;

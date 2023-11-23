@@ -16,7 +16,6 @@ int main() {
 
   std::vector<std::vector<Celda>> tabla; 
   std::vector<Jugador> jugadores;  
-  //std::vector<bool> opciones_cargadas(2, 0);
   bool opciones_cargadas[2];
 
   while (1) {

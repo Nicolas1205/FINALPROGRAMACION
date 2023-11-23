@@ -18,7 +18,7 @@ struct Celda {
   std::string jugador_receptor;
 };
 
-int obtener_numero_aleatorio();
+int obtener_numero_aleatorio(std::vector<bool> &existe_en_tabla);
 
 int calcular_suma_de_divisores(int numero);
 

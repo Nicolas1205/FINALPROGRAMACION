@@ -9,7 +9,6 @@
 const int COLUMNAS = 10;
 const int FILAS = 10;
 
-std::vector<bool> existe_en_tabla(100, 0);
 
 std::vector<bool> criba = crear_criba();
 
@@ -20,7 +19,7 @@ int contar_primos = 0, contar_capicua = 0, contar_ambos = 0;
 *
 * Comprueba que el numero no esta en la tabla aun con el arreglo `existe_en_tabla` 
 */
-int obtener_numero_aleatorio() {
+int obtener_numero_aleatorio(std::vector<bool> &existe_en_tabla) {
 
   std::random_device r;
   std::default_random_engine el(r());
@@ -31,7 +30,7 @@ int obtener_numero_aleatorio() {
     existe_en_tabla[numero_aleatorio] = 1;
     return numero_aleatorio;
   }
-  return obtener_numero_aleatorio();
+  return obtener_numero_aleatorio(existe_en_tabla);
 }
 
 int calcular_suma_de_divisores(int number) {
@@ -74,9 +73,11 @@ std::vector<std::vector<Celda>> generar_tabla(int &puntaje_dorado) {
 
   std::vector<std::vector<Celda>> tabla(COLUMNAS, std::vector<Celda>(FILAS));
 
+  std::vector<bool> existe_en_tabla(1000, 0);
+
   for (int i = 0; i < COLUMNAS; i++) {
     for (int j = 0; j < FILAS; j++) {
-      int numero_aleatorio = obtener_numero_aleatorio();
+      int numero_aleatorio = obtener_numero_aleatorio(existe_en_tabla);
       tabla[i][j].numero_celda = numero_aleatorio;
       tabla[i][j].es_primo = es_numero_primo(numero_aleatorio);
       tabla[i][j].es_capicua = es_numero_palindromo(numero_aleatorio);

@@ -6,16 +6,16 @@
 #include <string>
 #include <vector>
 
-void mostrar_jugador_ganador(Jugador *jugador_ganador) {
+void mostrar_jugador_ganador(Jugador &jugador_ganador) {
   std::cout << "******** RESULTADOS DE LA PARTIDA **************\n";
-  std::cout << "Jugador: " << jugador_ganador->usuario << " ha ganado!!!\n\n"
-            << "Nombre Completo: " << jugador_ganador->nombre << " " << jugador_ganador->apellido
+  std::cout << "Jugador: " << jugador_ganador.usuario << " ha ganado!!!\n\n"
+            << "Nombre Completo: " << jugador_ganador.nombre << " " << jugador_ganador.apellido
             << '\n';
-  std::cout << "Puntaje Total: " << jugador_ganador->puntaje_total << '\n';
+  std::cout << "Puntaje Total: " << jugador_ganador.puntaje_total << '\n';
 }
 
 void mostrar_menu_principal(bool tabla_creada, size_t cantidad_jugadores,
-                            int &puntaje_dorado) {
+                            int puntaje_dorado) {
 
   std::cout << "************* PRINCIPAL **************** \n"
                "1- Generar tablero  ";
