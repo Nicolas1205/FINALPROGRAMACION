@@ -6,10 +6,10 @@
 #include <string>
 #include <vector>
 
-const int8_t COLUMNAS = 10;
-const int8_t FILAS = 10;
+const int COLUMNAS = 10;
+const int FILAS = 10;
 
-std::vector<bool> existe(100, 0);
+std::vector<bool> existe_en_tabla(100, 0);
 
 std::vector<bool> criba = crear_criba();
 
@@ -26,10 +26,10 @@ int obtener_numero_aleatorio() {
   std::default_random_engine el(r());
   std::uniform_int_distribution<int> uniform_dist(1, 100);
 
-  int random = uniform_dist(el);
-  if (!existe[random]) {
-    existe[random] = 1;
-    return random;
+  int numero_aleatorio = uniform_dist(el);
+  if (!existe_en_tabla[numero_aleatorio]) {
+    existe_en_tabla[numero_aleatorio] = 1;
+    return numero_aleatorio;
   }
   return obtener_numero_aleatorio();
 }
@@ -68,7 +68,7 @@ bool es_numero_amigo(int number) {
 * Genera la tabla de juego
 * 
 * Devuelve el arreglo resultante con los valores y puntaje de celda, numeros especiales ya generados
-* Modifica el valor del puntaje dorado por referencia
+* Genera el valor del puntaje dorado por referencia
 */
 std::vector<std::vector<Celda>> generar_tabla(int &puntaje_dorado) {
 

@@ -24,9 +24,9 @@ int calcular_suma_de_divisores(int numero);
 
 bool es_numero_amigo(int numero);
 
-bool es_primo(int numero);
+bool es_numero_primo(int numero);
 
-bool es_palindromo(int numero);
+bool es_numero_palindromo(int numero);
 
 bool es_numero_perfecto(int numero);
 
