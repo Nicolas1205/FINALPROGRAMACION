@@ -1,39 +1,21 @@
-
 # Trabajo Final Integrado - Programacion
 
-- author : Anachuri Nicolas Daniel 
+autor: Anachuri Nicolas Daniel 
 
 
-# Requierements
+# Requirimientos 
 
-- GCC (Version used 11.1.0)
+- GCC (>11.1.0)
 
-# Quick Start 
-
-Download this repo:
+# Descargar proyecto 
 
 ```bash
-git clone https://github.com/Nicolas1205/TrabajoFinalProgramacion.git
+git clone https://github.com/Nicolas1205/FINALPROGRAMACION.git
+
 ```
 
-## If you use Linux based system
-
-Use the binary `app` located in `bin` directory
-
-## Build from source
-
-Alternativaly you can compile from source
-
-Run inside `src` direcotory:
+# Compilar el proyecto 
 
 ```bash
-g++ -std=c++17 -o main main.cpp genTable.cpp registerPlayer.cpp chosePlayer.cpp sieve.cpp showMenus.cpp play.cpp
+make
 ```
-
-g++ -std=c++17 -o main main.cpp gen_table.cpp register_player.cpp chose_player.cpp sieve.cpp show_menus.cpp play.cpp
-
-
-
-
-
-
