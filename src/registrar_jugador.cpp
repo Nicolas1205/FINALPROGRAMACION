@@ -27,6 +27,12 @@ void ordenar_por_apellido(std::vector<Jugador> &jugadores) {
   sort(jugadores.begin(), jugadores.end(), comparar_por_apellido);
 }
 
+/**
+* Agrega un jugador al arreglo
+*
+* Si el jugador existe, no se lo agrega (busca por attributo *usuario*)
+*
+*/
 void crear_jugador(std::string nombre, std::string apellido, std::string usuario,
                  std::vector<Jugador> &jugadores) {
 

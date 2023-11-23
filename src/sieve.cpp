@@ -3,6 +3,11 @@
 #include <stdio.h>
 #include <vector>
 
+/**
+* Crea un arreglo con los valores primos ya generados
+*
+* Devuelve un vector de booleanos, en donde 1 si es primo y 0 si no lo es
+*/
 std::vector<bool> crear_criba() {
 
   std::vector<bool> criba(10000, 1);

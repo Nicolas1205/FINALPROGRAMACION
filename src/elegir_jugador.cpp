@@ -3,7 +3,16 @@
 #include <iostream>
 #include <string>
 
+/**
+* Busca un jugador en el arreglo jugadores y lo agrega a los jugadores en juego 
+*
+* devuelve verdadero si ha sido agregado correctamente
+*
+* devuelve falso, si el jugador ya ha sido seleccionado para jugar o el jugador no existe
+*
+*/
 bool buscar_jugador(std::string usuario, std::vector<Jugador> &jugadores,
+
                    std::vector<Jugador> &jugadores_en_juego, int posicion) {
 
   for (int i = 0; i < jugadores.size(); i++) {
@@ -22,6 +31,11 @@ bool buscar_jugador(std::string usuario, std::vector<Jugador> &jugadores,
   return false;
 }
 
+/**
+* Elige a los dos jugadores para jugar 
+*
+* Devuelve un vector con los jugadores seleccionados
+*/
 std::vector<Jugador> elegir_jugadores(std::vector<Jugador> &jugadores) {
 
   std::vector<Jugador> jugadores_en_juego(2);
@@ -40,6 +54,5 @@ std::vector<Jugador> elegir_jugadores(std::vector<Jugador> &jugadores) {
       }
     }
   }
-
   return jugadores_en_juego;
 }
