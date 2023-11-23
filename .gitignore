@@ -1,4 +1,6 @@
-compile_flags.txt
 .cache
 compile
-./**/main
+app
+/**/app
+/**/main
+/**/*.o

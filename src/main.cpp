@@ -6,29 +6,33 @@
 #include <iostream>
 #include <thread>
 
+
 int main() {
-  const char *LIMPIAR_PANTALLA = "\033[2J\033[1;1H"; // Limpiar la pantalla
+
+  const char *LIMPIAR_PANTALLA = "\033[2J\033[1;1H"; 
 
   char opcion = 0;
-
   int puntaje_dorado = 0;
 
-  std::vector<std::vector<Celda>> tabla;                  // tablero de juego
-  std::vector<Jugador> jugadores;  // = obtener_datos_de_jugadores(); // Datos de Jugadores no necesario
-  std::vector<bool> opciones_cargadas(2, 0); // Opciones 1 y 2 cargadas para poder jugar
+  std::vector<std::vector<Celda>> tabla; 
+  std::vector<Jugador> jugadores;  
+  //std::vector<bool> opciones_cargadas(2, 0);
+  bool opciones_cargadas[2];
 
   while (1) {
     std::cout << LIMPIAR_PANTALLA;
     mostrar_menu_principal(opciones_cargadas[0], jugadores.size(), puntaje_dorado);
     std::cin >> opcion;
+
     if (opcion == '1') {
       tabla = generar_tabla(puntaje_dorado);
       opciones_cargadas[0] = 1;
     }
     if (opcion == '2') {
 
-      if (jugadores.size() == 10)
+      if (jugadores.size() == 10) {
         continue;
+      }
 
       std::cout << LIMPIAR_PANTALLA;
       // moduralizar
