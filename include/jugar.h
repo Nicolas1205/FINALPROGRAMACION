@@ -1,5 +1,5 @@
-#include "chose_player.h"
-#include "gen_table.h"
+#include "elegir_jugador.h"
+#include "generar_tabla.h"
 
 #ifndef PLAY
 #define PLAY

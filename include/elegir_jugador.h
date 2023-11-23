@@ -1,4 +1,4 @@
-#include "register_player.h"
+#include "registrar_jugador.h"
 #include <string>
 
 #ifndef CHOSEPLAYER
