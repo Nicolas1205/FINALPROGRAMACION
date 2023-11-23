@@ -1,7 +1,7 @@
-#include "../include/gen_table.h"
-#include "../include/play.h"
-#include "../include/register_player.h"
-#include "../include/show_menus.h"
+#include "../include/generar_tabla.h"
+#include "../include/jugar.h"
+#include "../include/registrar_jugador.h"
+#include "../include/mostrar_menus.h"
 #include <chrono>
 #include <iostream>
 #include <thread>

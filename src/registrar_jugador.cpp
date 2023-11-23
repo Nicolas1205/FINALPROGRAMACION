@@ -1,4 +1,4 @@
-#include "../include/register_player.h"
+#include "../include/registrar_jugador.h"
 #include <algorithm>
 #include <fstream>
 #include <iostream>

@@ -1,5 +1,5 @@
-#include "../include/chose_player.h"
-#include "../include/register_player.h"
+#include "../include/elegir_jugador.h"
+#include "../include/registrar_jugador.h"
 #include <iostream>
 #include <string>
 

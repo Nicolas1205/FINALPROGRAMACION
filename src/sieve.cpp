@@ -1,4 +1,4 @@
-#include "../include/sieve.h"
+#include "../include/criba_erastostenes.h"
 #include <math.h>
 #include <stdio.h>
 #include <vector>

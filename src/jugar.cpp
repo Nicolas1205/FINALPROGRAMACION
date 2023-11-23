@@ -1,9 +1,9 @@
-#include "../include/play.h"
-#include "../include/chose_player.h"
-#include "../include/gen_table.h"
-#include "../include/register_player.h"
-#include "../include/show_menus.h"
-#include "../include/sieve.h"
+#include "../include/jugar.h"
+#include "../include/elegir_jugador.h"
+#include "../include/generar_tabla.h"
+#include "../include/registrar_jugador.h"
+#include "../include/mostrar_menus.h"
+#include "../include/criba_erastostenes.h"
 #include <chrono>
 #include <iostream>
 #include <random>

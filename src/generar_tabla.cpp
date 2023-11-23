@@ -1,5 +1,5 @@
-#include "../include/gen_table.h"
-#include "../include/sieve.h"
+#include "../include/generar_tabla.h"
+#include "../include/criba_erastostenes.h"
 #include <algorithm>
 #include <cstdint>
 #include <random>

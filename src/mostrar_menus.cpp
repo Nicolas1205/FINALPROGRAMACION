@@ -1,6 +1,6 @@
-#include "../include/show_menus.h"
-#include "../include/chose_player.h"
-#include "../include/gen_table.h"
+#include "../include/mostrar_menus.h"
+#include "../include/elegir_jugador.h"
+#include "../include/generar_tabla.h"
 #include <iostream>
 #include <stdio.h>
 #include <string>
