@@ -7,7 +7,7 @@ struct Jugador {
   std::string nombre;
   std::string apellido;
   std::string usuario;
-  bool jugando = false; // ??
+  bool jugando = false;
   int puntaje_total = 0;
   int turnos = 1;
   int nada_atrapado = 0;

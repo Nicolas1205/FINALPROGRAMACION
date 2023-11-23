@@ -21,11 +21,7 @@ int contar_primos = 0, contar_capicua = 0, contar_ambos = 0;
 */
 int obtener_numero_aleatorio(std::vector<bool> &existe_en_tabla) {
 
-  std::random_device r;
-  std::default_random_engine el(r());
-  std::uniform_int_distribution<int> uniform_dist(1, 100);
-
-  int numero_aleatorio = uniform_dist(el);
+  int numero_aleatorio = rand() % 100; 
   if (!existe_en_tabla[numero_aleatorio]) {
     existe_en_tabla[numero_aleatorio] = 1;
     return numero_aleatorio;
