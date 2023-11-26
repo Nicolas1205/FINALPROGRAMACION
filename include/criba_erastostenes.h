@@ -1,7 +1,6 @@
 #ifndef SIEVE
 #define SIEVE
-#include <vector>
 
-std::vector<bool> crear_criba();
+void crear_criba(bool criba[1000]);
 
 #endif

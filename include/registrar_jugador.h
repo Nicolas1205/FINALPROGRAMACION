@@ -1,5 +1,4 @@
 #include <string>
-#include <vector>
 #ifndef REGISTERPLAYER
 #define REGISTERPLAYER
 
@@ -13,13 +12,11 @@ struct Jugador {
   int nada_atrapado = 0;
 };
 
-std::vector<Jugador> obtener_datos_de_jugadores();
-
 bool comparar_por_apellido(Jugador a, Jugador b);
 
 void crear_jugador(std::string nombre, std::string apellido, std::string usuario,
-                 std::vector<Jugador> &jugadores);
+                 Jugador jugadores[10], int &posicion_ultimo_jugador);
 
-void mostrar_jugadores(std::vector<Jugador> &jugadores);
+void mostrar_jugadores(Jugador jugadores[10]);
 
 #endif

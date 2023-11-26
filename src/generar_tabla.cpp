@@ -4,13 +4,10 @@
 #include <cstdint>
 #include <random>
 #include <string>
-#include <vector>
 
 const int COLUMNAS = 10;
 const int FILAS = 10;
 
-
-std::vector<bool> criba = crear_criba();
 
 int contar_primos = 0, contar_capicua = 0, contar_ambos = 0;
 
@@ -19,9 +16,9 @@ int contar_primos = 0, contar_capicua = 0, contar_ambos = 0;
 *
 * Comprueba que el numero no esta en la tabla aun con el arreglo `existe_en_tabla` 
 */
-int obtener_numero_aleatorio(std::vector<bool> &existe_en_tabla) {
+int obtener_numero_aleatorio(bool existe_en_tabla[1000]) {
 
-  int numero_aleatorio = rand() % 100; 
+  int numero_aleatorio = rand() % 1000; 
   if (!existe_en_tabla[numero_aleatorio]) {
     existe_en_tabla[numero_aleatorio] = 1;
     return numero_aleatorio;
@@ -51,7 +48,7 @@ bool es_numero_palindromo(int number) {
   return false;
 }
 
-bool es_numero_primo(int number) { return criba[number]; }
+bool es_numero_primo(int number, bool criba[1000]) { return criba[number]; }
 
 bool es_numero_perfecto(int number) { return calcular_suma_de_divisores(number) == number; }
 
@@ -65,17 +62,17 @@ bool es_numero_amigo(int number) {
 * Devuelve el arreglo resultante con los valores y puntaje de celda, numeros especiales ya generados
 * Genera el valor del puntaje dorado por referencia
 */
-std::vector<std::vector<Celda>> generar_tabla(int &puntaje_dorado) {
+void generar_tabla(int &puntaje_dorado, Celda tabla[10][10]) {
 
-  std::vector<std::vector<Celda>> tabla(COLUMNAS, std::vector<Celda>(FILAS));
-
-  std::vector<bool> existe_en_tabla(1000, 0);
+  bool existe_en_tabla[1000] = { false };
+  bool criba[1000] = { true };
+  crear_criba(criba);
 
   for (int i = 0; i < COLUMNAS; i++) {
     for (int j = 0; j < FILAS; j++) {
       int numero_aleatorio = obtener_numero_aleatorio(existe_en_tabla);
       tabla[i][j].numero_celda = numero_aleatorio;
-      tabla[i][j].es_primo = es_numero_primo(numero_aleatorio);
+      tabla[i][j].es_primo = es_numero_primo(numero_aleatorio, criba);
       tabla[i][j].es_capicua = es_numero_palindromo(numero_aleatorio);
       tabla[i][j].es_amigo = es_numero_amigo(numero_aleatorio);
       tabla[i][j].es_perfecto = es_numero_perfecto(numero_aleatorio);
@@ -89,6 +86,4 @@ std::vector<std::vector<Celda>> generar_tabla(int &puntaje_dorado) {
   }
 
   puntaje_dorado = contar_primos + contar_capicua + contar_ambos + 1000;
-
-  return tabla;
 }

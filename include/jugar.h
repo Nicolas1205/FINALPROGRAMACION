@@ -3,13 +3,19 @@
 
 #ifndef PLAY
 #define PLAY
-std::pair<int, int> generar_dados();
+
+struct Dados {
+  int primero; 
+  int segundo;
+};
+
+Dados generar_dados();
 
 int obtener_puntaje(Celda &celda);
 
-void tirar_dados(std::vector<Jugador> &jugadores,
-                 std::vector<std::vector<Celda>> &tabla, int puntaje_dorado);
+void tirar_dados(Jugador jugadores_en_juego[2],
+                 Celda tabla[10][10], int puntaje_dorado);
 
-void jugar(std::vector<Jugador> &jugadores, std::vector<std::vector<Celda>> &tabla, int puntaje_dorado);
+void jugar(Jugador jugadores[10], Celda tabla[10][10], int puntaje_dorado);
 
 #endif

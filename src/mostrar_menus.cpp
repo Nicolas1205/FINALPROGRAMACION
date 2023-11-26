@@ -1,10 +1,10 @@
 #include "../include/mostrar_menus.h"
 #include "../include/elegir_jugador.h"
 #include "../include/generar_tabla.h"
+#include "../include/jugar.h"
 #include <iostream>
 #include <stdio.h>
 #include <string>
-#include <vector>
 
 void mostrar_jugador_ganador(Jugador &jugador_ganador) {
   std::cout << "******** RESULTADOS DE LA PARTIDA **************\n";
@@ -46,14 +46,14 @@ void mostrar_menu_principal(bool tabla_creada, size_t cantidad_jugadores,
                "Elija una opcion: ";
 }
 
-void mostrar_menu_de_juego(std::vector<Jugador> &jugadores) {
+void mostrar_menu_de_juego(Jugador jugadores_en_juego[2], bool jugadores_cargados) {
   std::cout << "\n********* Comienza la aventura ***********\n";
 
   std::cout << "1- Seleccionar jugadores ";
 
-  if (jugadores.size())
-    std::cout << " (Jugador 1: " << jugadores[0].usuario
-              << " Jugador 2: " << jugadores[1].usuario << ")\n";
+  if (jugadores_cargados)
+    std::cout << " (Jugador 1: " << jugadores_en_juego[0].usuario
+              << " Jugador 2: " << jugadores_en_juego[1].usuario << ")\n";
   else
     std::cout << " (No hay jugadores Seleccionados)\n";
 
@@ -63,12 +63,12 @@ void mostrar_menu_de_juego(std::vector<Jugador> &jugadores) {
                "Elija una opcion: ";
 }
 
-void mostrar_resultado_de_jugador(Jugador &jugador, std::pair<int, int> dados,
+void mostrar_resultado_de_jugador(Jugador &jugador, Dados dados,
                                   Celda &celda, int puntaje) {
 
   std::cout << "\n\nTurno de jugador: " << jugador.usuario << '\n';
   std::cout << "Lanzando dados...\n";
-  std::cout << "Dado 1: " << dados.first << " - Dado 2: " << dados.second
+  std::cout << "Dado 1: " << dados.primero << " - Dado 2: " << dados.segundo
             << '\n';
   std::cout << "Numero Encontrado: " << celda.numero_celda;
 

@@ -1,5 +1,4 @@
 #include <string>
-#include <vector>
 
 #ifndef GENTABLE
 #define GENTABLE
@@ -18,7 +17,7 @@ struct Celda {
   std::string jugador_receptor;
 };
 
-int obtener_numero_aleatorio(std::vector<bool> &existe_en_tabla);
+int obtener_numero_aleatorio(bool existe_en_tabla[1000]);
 
 int calcular_suma_de_divisores(int numero);
 
@@ -30,6 +29,6 @@ bool es_numero_palindromo(int numero);
 
 bool es_numero_perfecto(int numero);
 
-std::vector<std::vector<Celda>> generar_tabla(int &puntaje_dorado);
+void generar_tabla(int &puntaje_dorado, Celda tabla[10][10]);
 
 #endif

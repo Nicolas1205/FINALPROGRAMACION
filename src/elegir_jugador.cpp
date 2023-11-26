@@ -11,11 +11,11 @@
 * devuelve falso, si el jugador ya ha sido seleccionado para jugar o el jugador no existe
 *
 */
-bool buscar_jugador(std::string usuario, std::vector<Jugador> &jugadores,
+bool buscar_jugador(std::string usuario, Jugador jugadores[10],
 
-                   std::vector<Jugador> &jugadores_en_juego, int posicion) {
+                   Jugador jugadores_en_juego[2], int posicion) {
 
-  for (int i = 0; i < jugadores.size(); i++) {
+  for (int i = 0; i < 10; i++) {
     if (jugadores[i].usuario == usuario) {
       if (jugadores[i].jugando == false ) {
         jugadores[i].jugando = true;
@@ -36,9 +36,7 @@ bool buscar_jugador(std::string usuario, std::vector<Jugador> &jugadores,
 *
 * Devuelve un vector con los jugadores seleccionados
 */
-std::vector<Jugador> elegir_jugadores(std::vector<Jugador> &jugadores) {
-
-  std::vector<Jugador> jugadores_en_juego(2);
+void elegir_jugadores(Jugador jugadores[10], Jugador jugadores_en_juego[2]) {
 
   for (int posicion = 0; posicion < 2; posicion++) {
     bool seleccionado = false;
@@ -54,5 +52,4 @@ std::vector<Jugador> elegir_jugadores(std::vector<Jugador> &jugadores) {
       }
     }
   }
-  return jugadores_en_juego;
 }

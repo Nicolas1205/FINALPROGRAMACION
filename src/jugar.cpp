@@ -11,12 +11,12 @@
 #include <string>
 #include <thread>
 #include <utility>
-#include <vector>
 
 const char *LIMPIAR_PANTALLA = "\033[2J\033[1;1H";
 
-std::pair<int, int> generar_dados() {
-  return std::make_pair(rand() % 10, rand() % 10);
+Dados generar_dados() {
+  Dados dados = { rand() % 10, rand() % 10};
+  return dados;
 }
 
 int obtener_puntaje(Celda &celda) {
@@ -35,30 +35,30 @@ int obtener_puntaje(Celda &celda) {
   return puntaje;
 }
 
-void tirar_dados(std::vector<Jugador> &jugadores_en_juego,
-                 std::vector<std::vector<Celda>> &tabla, int puntaje_dorado) {
+void tirar_dados(Jugador jugadores_en_juego[2],
+                 Celda tabla[10][10], int puntaje_dorado) {
 
   bool turno_jugador = 0;
 
   while (1) {
     while (jugadores_en_juego[turno_jugador].turnos--) {
-      auto [d1, d2] = generar_dados();
+      Dados dados = generar_dados();
 
       int puntos_obtenidos = 0;
 
-      Celda celda = tabla[d1][d2];
+      Celda &celda = tabla[dados.primero][dados.segundo];
 
       // TODO: modolurizar
-      if (tabla[d1][d2].atrapada == false) {
-        tabla[d1][d2].atrapada= true;
-        tabla[d1][d2].jugador_receptor = jugadores_en_juego[turno_jugador].usuario;
-      } else if (tabla[d1][d2].atrapada &&
-                 tabla[d1][d2].jugador_receptor !=
+      if (celda.atrapada == false) {
+        celda.atrapada= true;
+        celda.jugador_receptor = jugadores_en_juego[turno_jugador].usuario;
+      } else if (celda.atrapada &&
+                 celda.jugador_receptor !=
                      jugadores_en_juego[turno_jugador].usuario) {
 
         bool tomada_por = turno_jugador == 1 ? 0 : 1;
 
-        std::cout<<"\nLa Celda: "<<d1<<" "<<d2;
+        std::cout<<"\nLa Celda: "<<dados.primero<<" "<<dados.segundo;
         std::cout << "\nYA HA SIDO TOMADA POR " << jugadores_en_juego[tomada_por].usuario
                   << '\n';
         jugadores_en_juego[turno_jugador].turnos++;
@@ -82,7 +82,7 @@ void tirar_dados(std::vector<Jugador> &jugadores_en_juego,
         jugadores_en_juego[turno_jugador].nada_atrapado++;
       }
 
-      mostrar_resultado_de_jugador(jugadores_en_juego[turno_jugador], std::make_pair(d1, d2),
+      mostrar_resultado_de_jugador(jugadores_en_juego[turno_jugador], dados,
                           celda, puntos_obtenidos);
 
 
@@ -112,21 +112,22 @@ void tirar_dados(std::vector<Jugador> &jugadores_en_juego,
   }
 }
 
-void jugar(std::vector<Jugador> &jugadores, std::vector<std::vector<Celda>> &tabla, int puntaje_dorado) {
+void jugar(Jugador jugadores[10], Celda tabla[10][10], int puntaje_dorado) {
 
   char opcion_de_juego;
-  std::vector<Jugador> jugadores_en_juego;
-  bool jugadores_cargados = 0;
+  //std::vector<Jugador> jugadores_en_juego;
+  Jugador jugadores_en_juego[2];
+  bool jugadores_cargados = false;
 
   while (1) {
     std::cout << LIMPIAR_PANTALLA;
-    mostrar_menu_de_juego(jugadores_en_juego);
+    mostrar_menu_de_juego(jugadores_en_juego, jugadores_cargados);
 
     std::cin>>opcion_de_juego;
 
     if (opcion_de_juego == '1') {
       std::cout << LIMPIAR_PANTALLA;
-      jugadores_en_juego = elegir_jugadores(jugadores);
+      elegir_jugadores(jugadores, jugadores_en_juego);
       jugadores_cargados = 1;
     }
     if (opcion_de_juego == '2') {
