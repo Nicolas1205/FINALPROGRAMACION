@@ -35,13 +35,18 @@ int calcular_suma_de_divisores(int number) {
   return sum;
 }
 
-bool es_numero_palindromo(int number) {
+int numero_reverso(int numero) {
+    int numero_reverso = 0;
+    while (numero != 0) {
+        int digito = numero % 10;
+        numero_reverso = numero_reverso * 10 + digito;
+        numero /= 10;
+    }
+    return numero_reverso;
+}
 
-  std::string palindrome = std::to_string(number), s = palindrome;
-
-  std::reverse(s.begin(), s.end());
-
-  if (s == palindrome) {
+bool es_numero_capicua(int numero) {
+  if (numero_reverso(numero) == numero) {
     contar_capicua++;
     return true;
   }
@@ -73,7 +78,7 @@ void generar_tabla(int &puntaje_dorado, Celda tabla[10][10]) {
       int numero_aleatorio = obtener_numero_aleatorio(existe_en_tabla);
       tabla[i][j].numero_celda = numero_aleatorio;
       tabla[i][j].es_primo = es_numero_primo(numero_aleatorio, criba);
-      tabla[i][j].es_capicua = es_numero_palindromo(numero_aleatorio);
+      tabla[i][j].es_capicua = es_numero_capicua(numero_aleatorio);
       tabla[i][j].es_amigo = es_numero_amigo(numero_aleatorio);
       tabla[i][j].es_perfecto = es_numero_perfecto(numero_aleatorio);
       if(i == j) {
